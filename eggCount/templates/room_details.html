@@ -47,6 +47,77 @@
             background: #1976D2;
             transform: scale(1.05);
         }
+
+        .pdf_format{
+            display: inline-block;
+            padding: 8px 18px;
+            background: #2196F3;
+            color: white;
+            border-color: #2196F3;
+            border-radius: 25px;
+            transition: background 0.2s ease, transform 0.2s ease;
+            font-family: Arial, Helvetica, sans-serif;
+            text-decoration: none;
+            font-weight: bold;
+
+        }
+
+        .pdf_format:hover{
+            background: #1976D2;
+            transform: scale(1.05);
+        }
+
+        .footer {
+            margin-top: 40px;
+            padding: 30px 10px;
+            text-align: center;
+            font-size: 15px;
+            color: #333;
+        }
+
+        .footer p {
+            margin: 8px 0;
+        }
+
+        .footer a {
+            color: #2196F3;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer .copyright {
+            margin-top: 25px;
+            font-size: 13px;
+            color: #777;
+        }
+
+        .footer_con {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .footer_con a {
+            display: inline-block;
+            padding: 8px 18px;
+            background: #2196F3;
+            color: white;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .footer_con a:hover {
+            background: #1976D2;
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
@@ -83,10 +154,26 @@
             </tr>
             {% endfor %}
         </table>
+
+        <button type="submit" class="pdf_format">
+            click here to get records in pdf
+        </button>
         
-        
+        <footer class="footer">
+            <p>Room not listed?</p>
+            <a href="/rooms">register new room</a>
+
+            <p>register eggs collected</p>
+            <a href="/records">eggs collected</a>
+
+            <p class="copyright">
+                &copy; 2026 Mwaniki's Poultry Farm Management System
+            </p>
+        </footer>
 
 
     </div>
+
+    
 </body>
 </html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME</title>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 40px auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            align-items: center;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .room_title{
+            margin-right: 30px;
+        }
+
+        form{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            align-items: center;
+            margin-left: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        input, select {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        button {
+            background: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #43a047;
+        }
+
+        .link-box {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .link-box a {
+            text-decoration: none;
+            color: #2196F3;
+            font-weight: bold;
+        }
+
+        .link-box a:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #888;
+            font-size: 13px;
+        }
+
+        .full-width {
+      grid-column: 1 / 3;
+    }
+
+    input[type="submit"] {
+        background: #4CAF50;
+        color: #fff;
+        border: none;
+        padding: 12px;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+
+        grid-column: 1 / -1;
+        text-align: center;
+    }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <h1>Egg Collection Record</h1>
+         
+        <form action="" method="post">
+            {% csrf_token %}
+            
+            <div>
+                <label>ROOM: </label>
+                <select name="room_no">
+                    {% for x in chickrooms %}
+                        <option value=" {{x.id}} ">room {{x.roomNo}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <label>EGGS COLLECTED: </label>
+                <input type="number" name="egg_no" required>
+            </div>
+
+            <div>
+                <label>BROKEN EGGS: </label>
+                <input type="number" name="broken_eggs" DEFAULT="0">
+            </div>
+            
+            <div>
+                <label>PERIOD: </label>
+                <select name="period">
+                    <option value="Morning">Morning</option>
+                    <option value="Lunch break">Lunch break</option>
+                    <option value="Evening">Evening</option>
+                </select>
+            </div>
+
+            <div class="full-width">
+                <label for="remarks">Remarks (optional)</label>
+                <input type="text" name="remarks" id="remarks" placeholder=" dirty trays, etc."/>
+            </div>
+
+            <div class="full_width">
+                <input type="submit" value="save record">
+            </div>
+        </form>
+        <br><br>
+
+
+        <div class="link-box">
+            <p>Room not listed?</p>
+            <a href="/rooms">register new room</a>
+        </div>
+
+        <div class="link-box">
+            <p>See registered room status</p>
+            <a href="/records">Room status</a>
+        </div>
+
+        <div class="footer">
+            &copy; 2026 Mwaniki's Poultry Farm Management System
+        </div>
+
+    </div>
+    
+
+    {% if messages %}
+        {% for message in messages %}
+            <script>
+                alert("{{message}}");
+            </script>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>

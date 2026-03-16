@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room {{chickrooms.roomNo}} </title>
+
+    <style>
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+        }
+
+        table, th, td {
+            padding: 15px;
+        }
+
+        th{
+            background-color: aliceblue;
+        }
+
+        .update{
+            display: inline-block;
+            padding: 8px 18px;
+            background: #2196F3;
+            color: white;
+            border-color: #2196F3;
+            border-radius: 25px;
+            transition: background 0.2s ease, transform 0.2s ease;
+
+        }
+
+        .update:hover{
+            background: #1976D2;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <h1>Room {{chickroom.roomNo}} </h1>
+
+        <!-- changing room status --> 
+        <form action="" method="post">
+            {% csrf_token %}
+            <button type="submit" class="update">
+                Change room status
+            </button>
+        </form>
+
+        <h3>Egg collection for the past 5 days</h3>
+
+        <!-- record review for eggs collected-->
+        
+        <table>
+            
+            <tr>
+                <th>Date</th>
+                <th>Eggs Collected</th>
+                <th>Broken eggs</th>
+                <th>Period</th>
+            </tr>
+            {% for x in room_data %}
+            <tr>
+                <td>{{x.date}} </td>
+                <td> {{x.eggsNo}} </td>
+                <td> {{x.brokenEggs}} </td>
+                <td> {{x.period}} </td>
+            </tr>
+            {% endfor %}
+        </table>
+        
+        
+
+
+    </div>
+</body>
+</html>

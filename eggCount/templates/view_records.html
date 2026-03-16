@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Records</title>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .container_rooms{
+            max-width: 500px;
+            margin: 50px auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            align-items: center;
+
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            
+        }
+
+        .container_rooms:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+        }
+
+        .container_rooms p {
+            margin: 0;
+            font-size: 15px;
+            color: #444;
+        }
+
+        .status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .available {
+            background: #e8f5e9;
+            color: #ab3717;
+        }
+
+        .occupied {
+            background: #ffebee;
+            color: #28c640;
+        }
+
+
+        .link-box {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .link-box a {
+            text-decoration: none;
+            color: #2196F3;
+            font-weight: bold;
+        }
+
+        .link-box a:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            margin-top: 40px;
+            padding: 30px 10px;
+            text-align: center;
+            font-size: 15px;
+            color: #333;
+        }
+
+        .footer p {
+            margin: 8px 0;
+        }
+
+        .footer a {
+            color: #2196F3;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer .copyright {
+            margin-top: 25px;
+            font-size: 13px;
+            color: #777;
+        }
+
+        .footer_con {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .footer_con a {
+            display: inline-block;
+            padding: 8px 18px;
+            background: #2196F3;
+            color: white;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .footer_con a:hover {
+            background: #1976D2;
+            transform: scale(1.05);
+        }
+
+
+
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>AVAILABLE ROOMS</h1>
+        {%for x in chickrooms %}
+
+            <div class="container_rooms">
+                <div>
+                    <p>Room : {{x.roomNo}}</p>
+                </div>
+                
+                <div> 
+                    <span class="status
+                    {% if x.room_status == 'Active' %}available{% else %}occupied{% endif %}">
+                    {{x.room_status}}</span>
+                </div>
+
+                <footer class="footer_con">
+                    <a href="details/{{x.id}}">See more from this room?</a>
+                </footer>
+            </div>
+
+        {% endfor %}
+
+        <footer class="footer">
+            <p>Room not listed?</p>
+            <a href="/rooms">register new room</a>
+
+            <p>register eggs collected</p>
+            <a href="/records">eggs collected</a>
+
+            <p class="copyright">
+                &copy; 2026 Mwaniki's Poultry Farm Management System
+            </p>
+        </footer>
+    </div>
+
+    
+
+    
+</body>
+</html>

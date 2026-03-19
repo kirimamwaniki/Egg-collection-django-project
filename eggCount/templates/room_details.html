@@ -153,12 +153,21 @@
                 <td> {{x.period}} </td>
             </tr>
             {% endfor %}
+
         </table>
 
-        <button type="submit" class="pdf_format">
-            click here to get records in pdf
-        </button>
+        <form action="{% url 'pdf' chickroom.id %} " method="post">
+            {% csrf_token %}
+            <button type="submit" class="pdf_format">
+                click here to get records in pdf
+            </button>
+        </form>
         
+
+
+
+
+
         <footer class="footer">
             <p>Room not listed?</p>
             <a href="/rooms">register new room</a>

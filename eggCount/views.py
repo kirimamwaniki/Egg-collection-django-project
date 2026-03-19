@@ -57,7 +57,7 @@ def view_records(request):
     return HttpResponse(template.render(context, request))
 
 def room_details(request, id):
-    chickroom = rooms.objects.get(id=id)
+    chickroom = get_object_or_404(rooms, id=id)
     room_data = chickroom.hatches.all()
     template = loader.get_template('room_details.html')
 
@@ -70,6 +70,7 @@ def room_details(request, id):
         chickroom.save()
         return redirect('records')
 
+
     context = {
         'chickroom' : chickroom,
         'room_data' : room_data,
@@ -77,3 +78,13 @@ def room_details(request, id):
 
     return HttpResponse(template.render(context, request))
 
+def pdf_format(request, id):
+    chickroom = get_object_or_404(rooms, id=id)
+    room_data = chickroom.hatches.all()
+    template = loader.get_template('record_per_room_pdf.html')
+
+    context = {
+        'chickroom' : chickroom,
+        'room_data' : room_data
+    }
+    return HttpResponse(template.render(context, request))

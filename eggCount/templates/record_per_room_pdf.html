@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Student Records</h2>
+
+<table>
+    <tr>
+        <th>Date</th>
+        <th>Eggs Collected</th>
+        <th>Broken eggs</th>
+        <th>Period</th>
+    </tr>
+
+    {% for x in roomdata %}
+    <tr>
+        <td>{{x.date}} </td>
+        <td> {{x.eggsNo}} </td>
+        <td> {{x.brokenEggs}} </td>
+        <td> {{x.period}} </td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+</body>
+</html>

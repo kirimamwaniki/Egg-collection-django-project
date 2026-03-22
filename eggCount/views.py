@@ -4,11 +4,13 @@ from django.template import loader
 from .models import *
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
+from django.template.loader import get_template
+from xhtml2pdf import pisa
 
 
 def main (request):
     chickrooms = rooms.objects.all()
-    template = loader.get_template('egg_collection.html')
+    template = get_template('egg_collection.html')
 
     if request.method == 'POST':
         room_id = request.POST['room_no']
@@ -34,7 +36,7 @@ def main (request):
 
 
 def room_register(request):
-    template = loader.get_template('room_registration.html')
+    template = get_template('room_registration.html')
     chickrooms = rooms.objects.all()
     if request.method == 'POST':
         room_record = rooms(
@@ -49,7 +51,7 @@ def room_register(request):
 
 def view_records(request):
     chickrooms = rooms.objects.all()
-    template = loader.get_template('view_records.html')
+    template = get_template('view_records.html')
 
     context = {
         'chickrooms' : chickrooms,
@@ -59,7 +61,7 @@ def view_records(request):
 def room_details(request, id):
     chickroom = get_object_or_404(rooms, id=id)
     room_data = chickroom.hatches.all()
-    template = loader.get_template('room_details.html')
+    template = get_template('room_details.html')
 
     if request.method == 'POST':
         if chickroom.room_status == 'active':
@@ -81,10 +83,10 @@ def room_details(request, id):
 def pdf_format(request, id):
     chickroom = get_object_or_404(rooms, id=id)
     room_data = chickroom.hatches.all()
-    template = loader.get_template('record_per_room_pdf.html')
+    template = get_template('record_per_room_pdf.html')
+    html = template.render({'room_data' : room_data})
 
-    context = {
-        'chickroom' : chickroom,
-        'room_data' : room_data
-    }
-    return HttpResponse(template.render(context, request))
+    response = HttpResponse(content_type = 'application/pdf')
+    pisa.CreatePDF (html, dest=response)
+
+    return response
